@@ -1,0 +1,23 @@
+@ECHO OFF
+CLS
+color 07
+TITLE CONECT TELECOM - SCRIPT DE SINCRONIZACAO
+echo ############################################################
+echo # SCRIPT DESENVOLVIDO POR: TIAGO REALE                     #
+echo ############################################################ 
+echo .
+
+for /f "tokens=1,2,3,4 delims=/ " %%a in ('date /t') do (set DATA=%%a-%%b-%%c)
+for /f "tokens=1,2 delims=: " %%b in ('time /T') do (set HORA=%%b-%%c)
+
+SET EMPRESA=CONECT_TELECOM
+SET NOMESINC=DTI
+SET DIRO=D:\DOCUMENTOS\DTI
+SET DIRD=E:\BACKUPS\SYNC
+SET DIRLOGO=E:\BACKUPS\SCRIPT\LOG
+
+:: robocopy "%DIRO%" "%DIRD%" /E /ZB /NP /MT:5 /R:4 /W:5 /ETA /COPYALL
+
+robocopy "%DIRO%" "%DIRD%" /E /ZB /NP /MT:5 /R:4 /W:5 /ETA /COPYALL /LOG:"%DIRLOGO%\SINCRONIZACAO_%NOMESINC%_%DATA%_%HORA%.LOG"
+
+PAUSE
